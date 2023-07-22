@@ -32,6 +32,7 @@ def download_and_rename_images():
         # download images 
         for key in pictures:
             for idx, url in enumerate(pictures[key]):
+                url = url.split("?")[0] # full size
                 # print(key,url)
                 res = requests.get(url, stream = True)
                 
