@@ -30,25 +30,24 @@ def download_and_rename_images():
             
         # fill the dict with key (number) - value (list of image urls)
         for row in reader:
-            print(row)
-            
             pictures[row[id_col_idx]] = row[url_col_idx].strip().split("\\n") 
         # print(pictures)
             
         # download images 
         for key in pictures:
             for idx, url in enumerate(pictures[key]):
-                url = url.split("?")[id_col_idx] # full size
-                # print(key,url)
-                res = requests.get(url, stream = True)
-                
-                if res.status_code == 200:
-                    file_name = current_dir + '/' + str(key) + '-' + str(idx+1) + '.jpg'
-                    with open(file_name,'wb') as f:
-                        shutil.copyfileobj(res.raw, f)
-                    print('Image sucessfully Downloaded: ',file_name)
-                else:
-                    print('Image Couldn\'t be retrieved')
+                if url != "":
+                    url = url.split("?")[id_col_idx] # full size
+                    # print(key,url)
+                    res = requests.get(url, stream = True)
+                    
+                    if res.status_code == 200:
+                        file_name = current_dir + '/' + str(key) + '-' + str(idx+1) + '.jpg'
+                        with open(file_name,'wb') as f:
+                            shutil.copyfileobj(res.raw, f)
+                        print('Image sucessfully Downloaded: ',file_name)
+                    else:
+                        print('Image Couldn\'t be retrieved')
             
 
 if __name__ == "__main__":
