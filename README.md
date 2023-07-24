@@ -4,12 +4,21 @@
 ## Installation
 Dans le terminal, exécuter chacune des commandes suivantes, suivant l'OS de votre ordinateur.
 
-- Mac / Linux
+- Mac
     ```
     pip install virtualenv
     venv env
     source env/bin/activate
     pip install -R requirements.txt
+    ```
+- Linux
+    ```
+    sudo apt install python3-tk
+    pip install virtualenv
+    venv env
+    source env/bin/activate
+    pip install -R requirements.txt
+    ```
 - Windows
     ```
     pip install virtualenv
