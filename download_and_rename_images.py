@@ -10,6 +10,10 @@ def main():
     
 
 def download_and_rename_images():
+    id_col_idx = 0
+    url_col_idx = 1
+    csv_delimiter = ';'
+    
     # loads file
     root = tk.Tk()
     root.withdraw()
@@ -21,18 +25,20 @@ def download_and_rename_images():
     # open and store the csv file
     pictures = {}
     with open(file=file, mode='rb') as csvfile:
-        reader = csv.reader(csvfile, delimiter = ',')
+        reader = csv.reader(csvfile, delimiter=csv_delimiter)
         next(reader)
             
         # fill the dict with key (number) - value (list of image urls)
         for row in reader:
-            pictures[row[0]] = row[1].strip().split("\\n") 
+            print(row)
+            
+            pictures[row[id_col_idx]] = row[url_col_idx].strip().split("\\n") 
         # print(pictures)
             
         # download images 
         for key in pictures:
             for idx, url in enumerate(pictures[key]):
-                url = url.split("?")[0] # full size
+                url = url.split("?")[id_col_idx] # full size
                 # print(key,url)
                 res = requests.get(url, stream = True)
                 
